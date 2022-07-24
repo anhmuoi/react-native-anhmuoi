@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import Location from './Location/index.js';
 
@@ -38,6 +39,24 @@ const data = [
 ];
 
 function HotLocation(props) {
+    const [category, setCategory] = useState([]);
+
+    useEffect(() => {
+        // declare the data fetching function
+        const getListCategory = async () => {
+            axios
+                .get(
+                    `https://zezx3haz.api.sanity.io/v2021-10-21/data/query/production?query=%20%20%20*%5B_type%20%3D%3D%20%22category%22%5D%20%20%20%20`
+                )
+                .then((res) => {
+                    setCategory(res.data.result);
+                })
+                .catch((error) => console.log(error));
+        };
+        // call the function
+        getListCategory();
+    }, []);
+
     return (
         <View className="pt-4">
             <ScrollView
@@ -48,7 +67,7 @@ function HotLocation(props) {
                     paddingHorizontal: 8,
                 }}
             >
-                {data.map((item, key) => (
+                {category?.map((item, key) => (
                     <Location className="" location={item} key={key} />
                 ))}
             </ScrollView>

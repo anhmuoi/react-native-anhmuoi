@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import HotLocation from '../../components/HotLocation/index.js';
 import NearFood from '../../components/NearFood/index.js';
 import { useNavigation } from '@react-navigation/native';
+import { getRestaurantList } from '../../Features/Restaurants/RestaurantsSlice.js';
+import { useDispatch } from 'react-redux';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 const data = [
     {
@@ -21,6 +24,24 @@ const data = [
 
 function Home() {
     const navigation = useNavigation();
+
+    const [restaurant, setRestaurant] = useState();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const action = getRestaurantList();
+                const resultAction = await dispatch(action);
+                const rs = unwrapResult(resultAction);
+                setRestaurant(rs)
+            } catch (error) {
+                console.log(error);
+            }
+        })();
+    }, []);
+
+
     return (
         <ScrollView
             contentContainerStyle={{
@@ -28,7 +49,7 @@ function Home() {
             }}
         >
             <HotLocation />
-            {data.map((item, key) => (
+            {restaurant?.map((item, key) => (
                 <NearFood recommend={item} key={key} />
             ))}
         </ScrollView>

@@ -7,23 +7,29 @@ import { SafeAreaView, StatusBar } from 'react-native';
 import DetailScreen from './src/views/DetailScreen/index.js';
 import HomeScreen from './src/views/HomeScreen/index.js';
 import { TailwindProvider } from 'tailwindcss-react-native';
+import { Provider } from 'react-redux';
+import { store } from './src/app/store.js';
+import CartScreen from './src/views/CartScreen/index.js';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
     return (
-        <NavigationContainer>
-            <TailwindProvider>
-                <Stack.Navigator
-                    screenOptions={{
-                        headerShown: false,
-                    }}
-                >
-                    <Stack.Screen name="Home" component={HomeScreen} />
-                    <Stack.Screen name="Detail" component={DetailScreen} />
-                </Stack.Navigator>
-            </TailwindProvider>
-        </NavigationContainer>
+        <Provider store={store}>
+            <NavigationContainer>
+                <TailwindProvider>
+                    <Stack.Navigator
+                        screenOptions={{
+                            headerShown: false,
+                        }}
+                    >
+                        <Stack.Screen name="Home" component={HomeScreen} />
+                        <Stack.Screen name="Detail" component={DetailScreen} />
+                        <Stack.Screen name="Cart" component={CartScreen} />
+                    </Stack.Navigator>
+                </TailwindProvider>
+            </NavigationContainer>
+        </Provider>
     );
 }
 
