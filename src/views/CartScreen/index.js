@@ -45,10 +45,12 @@ function CartScreen() {
             </View>
             {cartList.cartItems.length > 0 ? cartList.cartItems.map((item) => <CartInfo key={item.id} cart={item} />) : <></>}
 
-            <View className="absolute bottom-1 w-full p-4 bg-white">
+            <TouchableOpacity onPress={() => navigation.navigate('PreparingOrder', { restaurant })} className="absolute bottom-1 w-full p-4 bg-white">
                 <Text className="font-bold bottom-1 ">Total price: {String(cartTotalPrice).replace(/(.)(?=(\d{3})+$)/g, '$1,')} VNĐ</Text>
-                <Button title="thanh toán" color="#05ADA3" />
-            </View>
+                <View className="w-full justify-center bg-[#05ADA3] p-2 rounded-md text-center items-center">
+                    <Text className="font-bold text-white text-xl">Order</Text>
+                </View>
+            </TouchableOpacity>
         </View>
     );
 }

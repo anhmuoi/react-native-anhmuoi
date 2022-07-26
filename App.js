@@ -10,6 +10,8 @@ import { TailwindProvider } from 'tailwindcss-react-native';
 import { Provider } from 'react-redux';
 import { store } from './src/app/store.js';
 import CartScreen from './src/views/CartScreen/index.js';
+import OrderScreen from './src/views/OrderScreen/index.js';
+import PreparingOrder from './src/views/PreparingOrder/index.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +28,8 @@ function App() {
                         <Stack.Screen name="Home" component={HomeScreen} />
                         <Stack.Screen name="Detail" component={DetailScreen} />
                         <Stack.Screen name="Cart" component={CartScreen} />
+                        <Stack.Screen name="PreparingOrder" component={PreparingOrder} />
+                        <Stack.Screen name="Order" component={OrderScreen} />
                     </Stack.Navigator>
                 </TailwindProvider>
             </NavigationContainer>

@@ -11,7 +11,6 @@ function CartInfo({ cart }) {
     const navigation = useNavigation();
 
     const handleRemoveCart = () => {
-        console.log(cart.id);
         const action = removeFromCart(cart.id);
         dispatch(action);
     };
