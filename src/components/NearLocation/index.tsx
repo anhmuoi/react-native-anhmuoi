@@ -4,12 +4,18 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import { Dimensions } from 'react-native';
 import IconEvilIcons from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
-import { urlFor } from '../../api/sanity.js';
+import { urlFor } from '../../api/sanity';
+import { Restaurant, RestaurantList } from '../../model/restaurant';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const { width, height } = Dimensions.get('window');
 
-function NearLocation({ restaurant }) {
-    const navigation = useNavigation();
+interface Props {
+    restaurant: Restaurant;
+}
+
+function NearLocation({ restaurant }: Props) {
+    const navigation = useNavigation<NativeStackNavigationProp<any>>();
     return (
         <TouchableOpacity onPress={() => navigation.navigate('Detail', { restaurant })}>
             <View className="rounded-sm relative mx-1 bg-white" style={{ width: width / 1.7, height: width / 1.7 }}>
@@ -24,7 +30,7 @@ function NearLocation({ restaurant }) {
                     <View className="flex-row justify-between items-center">
                         <View className="flex-row ">
                             {Array(restaurant?.rating)
-                                .fill('a')
+                                .fill(1)
                                 .map((item, key) => (
                                     <IconEntypo
                                         name="star"

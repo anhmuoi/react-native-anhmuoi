@@ -1,44 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import Location from './Location/index.js';
+import Location from './Location/index';
 
-const data = [
-    {
-        title: 'hadilao',
-        img: require('../../assets/catergories/hadilao.png'),
-    },
-    {
-        title: 'hadilao',
-        img: require('../../assets/catergories/hadilao.png'),
-    },
-    {
-        title: 'hadilao',
-        img: require('../../assets/catergories/hadilao.png'),
-    },
-    {
-        title: 'hadilao',
-        img: require('../../assets/catergories/hadilao.png'),
-    },
-    {
-        title: 'hadilao',
-        img: require('../../assets/catergories/hadilao.png'),
-    },
-    {
-        title: 'hadilao',
-        img: require('../../assets/catergories/hadilao.png'),
-    },
-    {
-        title: 'hadilao',
-        img: require('../../assets/catergories/hadilao.png'),
-    },
-    {
-        title: 'hadilao',
-        img: require('../../assets/catergories/hadilao.png'),
-    },
-];
-
-function HotLocation(props) {
+function HotLocation() {
     const [category, setCategory] = useState([]);
 
     useEffect(() => {
@@ -68,7 +33,7 @@ function HotLocation(props) {
                 }}
             >
                 {category?.map((item, key) => (
-                    <Location className="" location={item} key={key} />
+                    <Location location={item} key={key} />
                 ))}
             </ScrollView>
         </View>

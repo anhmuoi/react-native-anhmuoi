@@ -2,22 +2,24 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Button, Image, Text, TouchableOpacity, View } from 'react-native';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import { cartItemCountSelector, cartItemTotalSelector } from '../../Features/Cart/selectors.js';
+import { cartItemCountSelector, cartItemTotalSelector } from '../../Features/Cart/selectors';
 import { useSelector } from 'react-redux';
-import CartInfo from '../../components/CartInfo/index.js';
+import CartInfo from '../../components/CartInfo/index';
+import { useAppSelector } from '../../app/hooks';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 function CartScreen() {
     const {
         params: { restaurant },
-    } = useRoute();
+    } = useRoute<any>();
 
     const cartItemCount = useSelector(cartItemCountSelector);
 
     const cartTotalPrice = useSelector(cartItemTotalSelector);
 
-    const cartList = useSelector((state) => state.cart);
+    const cartList = useAppSelector((state) => state.cart);
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<any>>();
     return (
         <View className="h-full">
             <View className="flex-row justify-center relative pt-4 bg-white pb-8 border-b-2 border-[#05ADA3]">
@@ -43,7 +45,7 @@ function CartScreen() {
                     <Text className="font-bold text-[#05ADA3] mr-4">Change</Text>
                 </TouchableOpacity>
             </View>
-            {cartList.cartItems.length > 0 ? cartList.cartItems.map((item) => <CartInfo key={item.id} cart={item} />) : <></>}
+            {cartList.cartItems.length > 0 ? cartList.cartItems.map((item, key) => <CartInfo key={key} cart={item} />) : <></>}
 
             <TouchableOpacity onPress={() => navigation.navigate('PreparingOrder', { restaurant })} className="absolute bottom-1 w-full p-4 bg-white">
                 <Text className="font-bold bottom-1 ">Total price: {String(cartTotalPrice).replace(/(.)(?=(\d{3})+$)/g, '$1,')} VNĐ</Text>

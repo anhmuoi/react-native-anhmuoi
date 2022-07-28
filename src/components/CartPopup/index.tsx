@@ -1,16 +1,22 @@
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartItemCountSelector, cartItemTotalSelector } from '../../Features/Cart/selectors.js';
+import { cartItemCountSelector, cartItemTotalSelector } from '../../Features/Cart/selectors';
+import { Restaurant } from '../../model/restaurant';
 
-function CartPopup({ restaurant }) {
+interface Props {
+    restaurant: Restaurant;
+}
+
+function CartPopup({ restaurant }: Props) {
     const cartItemCount = useSelector(cartItemCountSelector);
 
     const cartTotalPrice = useSelector(cartItemTotalSelector);
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
     return (
         <TouchableOpacity className="absolute bottom-3 w-full z-20" onPress={() => navigation.replace('Cart', { restaurant })}>

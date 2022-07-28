@@ -3,13 +3,15 @@ import React from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import * as Progress from 'react-native-progress';
-import MapView, { Marker } from 'react-native-maps';
+import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 function OrderScreen() {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const {
         params: { restaurant },
-    } = useRoute();
+    } = useRoute<any>();
 
     return (
         <View className="bg-[#00CCBB] w-full h-full">
@@ -22,14 +24,14 @@ function OrderScreen() {
                 <View className="bg-white m-4 rounded-md px-4 pb-4 items-center z-10">
                     <Text className="font-medium  pt-4 text-gray-400 text-lg">Thời gian ước tính</Text>
                     <Text className="text-black font-bold text-3xl  pb-4">30-40 phút</Text>
-                    <Progress.Bar size={30} color="#00CCBB" indeterminate></Progress.Bar>
+                    <Progress.Bar color="#00CCBB" indeterminate></Progress.Bar>
                     <Text className="text-sm text-gray-500 font-medium ">Order của bạn tại {restaurant.name} đang được vận chuyển</Text>
                 </View>
             </SafeAreaView>
             <MapView
                 initialRegion={{
-                    latitude: parseFloat(restaurant.lat),
-                    longitude: parseFloat(restaurant.long),
+                    latitude: restaurant.lat,
+                    longitude: restaurant.long,
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005,
                 }}
@@ -38,14 +40,14 @@ function OrderScreen() {
             >
                 <Marker
                     coordinate={{
-                        latitude: parseFloat(restaurant.lat),
-                        longitude: parseFloat(restaurant.long),
+                        latitude: restaurant.lat,
+                        longitude: restaurant.long,
                     }}
                     title={restaurant.name}
                     description={restaurant.short_description}
                     identifier="origin"
                     pinColor="#00CCBB"
-                ></Marker>
+                />
             </MapView>
         </View>
     );

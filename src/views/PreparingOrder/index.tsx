@@ -1,14 +1,15 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import * as Animation from 'react-native-animatable';
 import * as Progress from 'react-native-progress';
 
 function PreparingOrder() {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const {
         params: { restaurant },
-    } = useRoute();
+    } = useRoute<any>();
 
     useEffect(() => {
         const timeOut = setTimeout(() => {

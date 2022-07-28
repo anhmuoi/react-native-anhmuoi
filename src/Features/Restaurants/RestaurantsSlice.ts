@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import restaurantApi from '../../api/restaurantApi.js';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import restaurantApi from '../../api/restaurantApi';
+import { RestaurantList } from '../../model/restaurant';
 
 export const getRestaurantList = createAsyncThunk('restaurant/getAll', async () => {
     //call api
@@ -7,9 +8,11 @@ export const getRestaurantList = createAsyncThunk('restaurant/getAll', async () 
     return data.data.result;
 });
 
-const initialState = {
-    RestaurantList: [],
-};
+interface RestaurantState {
+    RestaurantList: RestaurantList;
+}
+
+const initialState = {} as RestaurantState;
 
 const RestaurantsSlice = createSlice({
     name: 'restaurant',
@@ -37,7 +40,7 @@ const RestaurantsSlice = createSlice({
         // },
     },
     extraReducers: {
-        [getRestaurantList.fulfilled]: (state, action) => {
+        [getRestaurantList.fulfilled.toString()]: (state: any, action: PayloadAction) => {
             state.RestaurantList = action.payload;
         },
     },

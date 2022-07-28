@@ -1,11 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { urlFor } from '../../api/sanity.js';
+import { urlFor } from '../../api/sanity';
 import { useDispatch } from 'react-redux';
-import { removeFromCart } from '../../Features/Cart/cartSlice.js';
+import { removeFromCart } from '../../Features/Cart/cartSlice';
+import { Cart } from '../../model/cart';
 
-function CartInfo({ cart }) {
+interface Props {
+    cart: Cart;
+}
+
+function CartInfo({ cart }: Props) {
     const dispatch = useDispatch();
 
     const navigation = useNavigation();

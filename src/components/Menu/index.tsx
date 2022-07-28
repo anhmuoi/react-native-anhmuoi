@@ -1,12 +1,17 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Currency from 'react-currency-formatter';
-import { urlFor } from '../../api/sanity.js';
+import { urlFor } from '../../api/sanity';
 import IconEntypo from 'react-native-vector-icons/Entypo';
-import { addFromCart } from '../../Features/Cart/cartSlice.js';
+import { addFromCart } from '../../Features/Cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { Dishes } from '../../model/restaurant';
 
-function Menu({ menu }) {
+interface Props {
+    menu: Dishes;
+}
+
+function Menu({ menu }: Props) {
     const [showAdd, setShowAdd] = useState(false);
     const [count, setCount] = useState(0);
     const dispatch = useDispatch();
@@ -33,7 +38,6 @@ function Menu({ menu }) {
         });
         dispatch(action);
     };
-
 
     return (
         <TouchableOpacity className="bg-white  items-center mb-4 mx-2" onPress={() => setShowAdd(!showAdd)}>

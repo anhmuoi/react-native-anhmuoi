@@ -3,13 +3,11 @@ import { Dimensions, Image, Text, TextInput, View } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import { styles } from './style.js';
+import { styles } from './style';
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
-function Header(props) {
-    const [text, onChangeText] = React.useState('');
-    const [number, onChangeNumber] = React.useState(null);
+function Header() {
     return (
         <View style={styles.header}>
             <View style={styles.headerTop}>
@@ -36,7 +34,7 @@ function Header(props) {
                 <View style={styles.search}>
                     <IconAnt name="search1" size={30} color="#78787A" style={{ transform: [{ scaleX: 0.5 }, { scaleY: 0.5 }] }} />
                     <View>
-                        <TextInput style={styles.input} onChangeText={onChangeNumber} value={number} placeholder="Restaurants and cuisines" />
+                        <TextInput placeholder="Restaurants and cuisines" />
                     </View>
                 </View>
                 <View style={styles.option}>

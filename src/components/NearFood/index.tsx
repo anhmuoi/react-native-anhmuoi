@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import IconFeather from 'react-native-vector-icons/Feather';
-import { getRestaurantList } from '../../Features/Restaurants/RestaurantsSlice.js';
-import NearLocation from '../NearLocation/index.js';
+import { getRestaurantList } from '../../Features/Restaurants/RestaurantsSlice';
+import { Restaurant, RestaurantList } from '../../model/restaurant';
+import NearLocation from '../NearLocation/index';
 
+interface Props {
+    recommend: RestaurantList;
+}
 
-function NearFood({ recommend }) {
-    
-
+function NearFood({ recommend }: Props) {
     return (
         <View className="mt-2">
             <View className="px-2 flex-row justify-between items-baseline">

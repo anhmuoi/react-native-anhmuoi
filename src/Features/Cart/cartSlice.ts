@@ -1,18 +1,24 @@
+import { Cart } from './../../model/cart';
 import { createSlice } from '@reduxjs/toolkit';
 
+interface CartState {
+    cartItems: Cart[];
+}
+
 const initialState = {
-    cartItems: [],
-};
+    cartItems: []
+} as CartState;
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
         addFromCart(state, action) {
+            console.log(state);
             const newItem = action.payload;
             const index = state.cartItems.findIndex((x) => x.id === newItem.id);
             if (index >= 0) {
-              state.cartItems[index].quantity = newItem.quantity
+                state.cartItems[index].quantity = newItem.quantity;
             } else {
                 state.cartItems.push(newItem);
             }

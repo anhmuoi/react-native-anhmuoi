@@ -4,20 +4,31 @@ import { useRoute } from '@react-navigation/native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconEvilIcons from 'react-native-vector-icons/EvilIcons';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Menu from '../../components/Menu/index.js';
-import { urlFor } from '../../api/sanity.js';
-import CartPopup from '../../components/CartPopup/index.js';
+import Menu from '../../components/Menu/index';
+import { urlFor } from '../../api/sanity';
+import CartPopup from '../../components/CartPopup/index';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Dishes } from '../../model/restaurant';
 
-const DetailScreen = ({ navigation }) => {
+type RootStackParamList = {
+    Detail: undefined;
+};
+
+type Props = NativeStackScreenProps<RootStackParamList, 'Detail'>;
+
+const DetailScreen = ({ navigation }: Props) => {
     const {
         params: { restaurant },
-    } = useRoute();
+    } = useRoute<any>();
 
     return (
         <View>
-            <ScrollView className="bg-[#F0EEF0]" contentContainerStyle={{
-                paddingBottom:70
-            }}>
+            <ScrollView
+                className="bg-[#F0EEF0]"
+                contentContainerStyle={{
+                    paddingBottom: 70,
+                }}
+            >
                 <View>
                     <Image
                         source={{
@@ -52,7 +63,7 @@ const DetailScreen = ({ navigation }) => {
 
                 <View>
                     <Text className="font-bold pt-4 px-4 text-lg">Menu</Text>
-                    {restaurant?.dishes?.map((item, key) => (
+                    {restaurant?.dishes?.map((item: Dishes, key: number) => (
                         <Menu menu={item} key={key}></Menu>
                     ))}
                 </View>
