@@ -1,6 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import DetailScreen from './src/views/DetailScreen/index';
 import HomeScreen from './src/views/HomeScreen/index';
@@ -10,6 +9,7 @@ import { store } from './src/app/store';
 import CartScreen from './src/views/CartScreen/index';
 import OrderScreen from './src/views/OrderScreen/index';
 import PreparingOrder from './src/views/PreparingOrder/index';
+import PassCodeScreen from './src/views/PassCodeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,8 +22,9 @@ function App() {
                         screenOptions={{
                             headerShown: false,
                         }}
-                        
+                        initialRouteName="PassCode"
                     >
+                        <Stack.Screen name="PassCode" component={PassCodeScreen} />
                         <Stack.Screen name="Home" component={HomeScreen} />
                         <Stack.Screen name="Detail" component={DetailScreen} />
                         <Stack.Screen name="Cart" component={CartScreen} />
